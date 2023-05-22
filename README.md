@@ -30,6 +30,8 @@ We use LLMs as ranking models in an instruction-following paradigm. For each use
 
 ## 🔍 Key Findings
 
+> Please click the links below each "Observation" to find the code and scripts to reproduce the results.
+
 ### Observation 1. LLMs struggle to perceive order of user histories
 
 LLMs can utilize historical behaviors for personalized ranking, but *struggle to perceive the order* of the given sequential interaction histories.
