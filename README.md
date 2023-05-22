@@ -13,11 +13,16 @@ We use LLMs as ranking models in an instruction-following paradigm. For each use
 ## 🚀 Quick Start
 
 1. Write your own OpenAI API keys into [`llmrank/openai_api.yaml`](https://github.com/RUCAIBox/LLMRank/blob/master/llmrank/openai_api.yaml).
-2. Install dependencies.
+2. Unzip dataset files.
+    ```bash
+    cd llmrank/dataset/ml-1m/; unzip ml-1m.inter.zip
+    cd llmrank/dataset/Games/; unzip Games.inter.zip
+    ```
+3. Install dependencies.
     ```bash
     pip install -r requirements.txt
     ```
-3. Evaluate ChatGPT's zero-shot ranking abilities on ML-1M dataset.
+4. Evaluate ChatGPT's zero-shot ranking abilities on ML-1M dataset.
     ```bash
     cd llmrank/
     python evaluate.py -m Rank
