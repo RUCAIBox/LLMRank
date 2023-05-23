@@ -7,4 +7,3 @@ async_dispatch: True
 
 # Others
 max_his_len: 50
-recall_budget: 20

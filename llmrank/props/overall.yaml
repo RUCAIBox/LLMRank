@@ -13,5 +13,6 @@ topk: [1, 5, 10, 20, 50]
 
 train_neg_sample_args: ~
 selected_user_suffix: random
+recall_budget: 20
 has_gt: True
 fix_pos: -1
