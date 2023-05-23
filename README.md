@@ -18,6 +18,7 @@ We use LLMs as ranking models in an instruction-following paradigm. For each use
     cd llmrank/dataset/ml-1m/; unzip ml-1m.inter.zip
     cd llmrank/dataset/Games/; unzip Games.inter.zip
     ```
+    For data preparation details, please refer to [[data-preparation]](llmrank/dataset/data-preparation.md).
 3. Install dependencies.
     ```bash
     pip install -r requirements.txt
