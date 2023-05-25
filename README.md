@@ -43,9 +43,7 @@ LLMs can utilize historical behaviors for personalized ranking, but *struggle to
 
 By employing specifically designed promptings, such as recency-focused prompting and in-context learning, *LLMs can be triggered to perceive the order* of historical user behaviors, leading to improved ranking performance.
 
-[reproduction scripts (coming soon)]
-
-[benchmark 1 (Table 2) (coming soon)]
+[[reproduction scripts & benchmark 1 (Table 2)]](scripts/ob2-trigger-llms-to-perceive-order.md)
 
 ### Observation 3. Promising zero-shot ranking abilities
 

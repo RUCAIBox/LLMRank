@@ -39,12 +39,6 @@ def evaluate(model_name, dataset_name, pretrained_file, **kwargs):
         logger.info(f'Loading from {pretrained_file}')
         model.load_state_dict(checkpoint['state_dict'], strict=False)
         model.load_other_parameter(checkpoint.get("other_parameter"))
-        if model_name == 'UniSRec' and config['fix_enc']:
-            logger.info(f'Fix encoder parameters.')
-            for _ in model.position_embedding.parameters():
-                _.requires_grad = False
-            for _ in model.trm_encoder.parameters():
-                _.requires_grad = False
 
     logger.info(model)
 
