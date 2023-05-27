@@ -37,7 +37,7 @@ def sample_candidates(dataset_name, strategy, **kwargs):
 
     # sample selected users
     selected_users = random.sample(dataset.field2id_token['user_id'][1:].tolist(), 200)
-    rand_user_file = os.path.join(f'{config["dataset"]}.{strategy}')
+    rand_user_file = os.path.join(f'{config["data_path"]}/{config["dataset"]}.{strategy}')
     with open(rand_user_file, 'w', encoding='utf-8') as file:
         if strategy == 'random':
             for user in selected_users:
