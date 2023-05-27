@@ -23,4 +23,21 @@
 
 ### Amazon Review - Games (Games)
 
-*To be updated soon.*
+1. Download raw datasets from Amazon review data 2018, including the metadata and ratings only data of each category. [[link]](https://nijianmo.github.io/amazon/index.html)
+Here is an example.
+    ```
+    dataset/
+      raw/
+        Metadata/
+          meta_Video_Games.json.gz
+        Ratings/
+          Video_Games.csv
+    ```
+2. Process downstream datasets.
+    ```
+    cd llmrank/
+    python data_process_amazon.py -d Games
+    ```
+    Note that following [[UniSRec]](https://github.com/RUCAIBox/UniSRec), we split the data into separate files for training, validation and evaluation: `.train.inter`, `.valid.inter`, `.test.inter` .
+
+3. Repeat the second step in processing ML-1M datasets.
