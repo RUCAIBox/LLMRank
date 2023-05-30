@@ -75,6 +75,7 @@ class Rank(SequentialRecommender):
         :param idxs: item id retrieved by candidate generation models [batch_size, candidate_size]
         :return:
         """
+        origin_batch_size = idxs.shape[0]
         if self.boots:
             """ 
             bootstrapping is adopted to alleviate position bias
