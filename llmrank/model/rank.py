@@ -111,8 +111,8 @@ class Rank(SequentialRecommender):
             else:
                 rec_item_idx_list = self.parsing_output_indices(scores, i, response_list, idxs, candidate_text)
 
-            if int(pos_items[i // origin_batch_size]) in candidate_idx:
-                target_text = candidate_text[candidate_idx.index(int(pos_items[i // origin_batch_size]))]
+            if int(pos_items[i % origin_batch_size]) in candidate_idx:
+                target_text = candidate_text[candidate_idx.index(int(pos_items[i % origin_batch_size]))]
                 try:
                     ground_truth_pr = rec_item_idx_list.index(target_text)
                     self.logger.info(f'Ground-truth [{target_text}]: Ranks {ground_truth_pr}')
@@ -129,8 +129,8 @@ class Rank(SequentialRecommender):
         user_his = interaction[self.ITEM_SEQ]
         user_his_len = interaction[self.ITEM_SEQ_LEN]
         origin_batch_size = user_his.size(0)
-        real_his_len = min(self.max_his_len, user_his_len[i // origin_batch_size].item())
-        user_his_text = [str(j) + '. ' + self.item_text[user_his[i // origin_batch_size, user_his_len[i // origin_batch_size].item() - real_his_len + j].item()] \
+        real_his_len = min(self.max_his_len, user_his_len[i % origin_batch_size].item())
+        user_his_text = [str(j) + '. ' + self.item_text[user_his[i % origin_batch_size, user_his_len[i % origin_batch_size].item() - real_his_len + j].item()] \
                 for j in range(real_his_len)]
         candidate_text = [self.item_text[idxs[i,j]]
                 for j in range(idxs.shape[1])]
