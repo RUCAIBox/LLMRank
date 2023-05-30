@@ -69,6 +69,22 @@ By employing specifically designed promptings, such as recency-focused prompting
     python evaluate.py -m BPR -d Games -p pretrained_models/BPR-Games.pth
     ```
 
+- Pop
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    # python run_baseline.py -m Pop -d ml-1m
+    # mv xxx.pth pretrained_models/Pop-ml-1m.pth
+    python evaluate.py -m Pop -p pretrained_models/Pop-ml-1m.pth
+
+    # Games
+    # python run_baseline.py -m Pop -d Games
+    # mv xxx.pth pretrained_models/Pop-Games.pth
+    python evaluate.py -m Pop -d Games -p pretrained_models/Pop-Games.pth
+    ```
+
 - SASRec
 
     ```bash

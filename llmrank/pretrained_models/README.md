@@ -5,6 +5,8 @@ The pre-trained models can be downloaded from [[Google Drive]](https://drive.goo
 ```
 BPR-ml-1m.pth
 BPR-Games.pth
+Pop-ml-1m.pth
+Pop-Games.pth
 SASRec-ml-1m.pth
 SASRec-Games.pth
 ```
