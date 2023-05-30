@@ -59,6 +59,7 @@ By employing specifically designed promptings, such as recency-focused prompting
 
     # Games
     python evaluate.py -m BM25 -d Games
+    ```
 
 ### Conventional Methods
 
