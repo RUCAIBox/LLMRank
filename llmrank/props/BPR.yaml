@@ -1,0 +1,4 @@
+embedding_size: 64
+train_neg_sample_args:
+  distribution: uniform
+  sample_num: 1

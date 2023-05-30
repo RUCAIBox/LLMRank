@@ -37,21 +37,23 @@ We use LLMs as ranking models in an instruction-following paradigm. For each use
 
 LLMs can utilize historical behaviors for personalized ranking, but *struggle to perceive the order* of the given sequential interaction histories.
 
-[[reproduction scripts]](scripts/ob1-struggle-to-perceive-order.md)
+**Code is here ->** [[reproduction scripts]](scripts/ob1-struggle-to-perceive-order.md)
 
 ### Observation 2. LLMs can be triggered to perceive the orders
 
 By employing specifically designed promptings, such as recency-focused prompting and in-context learning, *LLMs can be triggered to perceive the order* of historical user behaviors, leading to improved ranking performance.
 
-[[reproduction scripts & benchmark 1 (Table 2)]](scripts/ob2-trigger-llms-to-perceive-order.md)
+<div align="center"> 
+<img src='assets/tab-2.png' width="75%">
+</div>
+
+**Code is here ->** [[reproduction scripts]](scripts/ob2-trigger-llms-to-perceive-order.md)
 
 ### Observation 3. Promising zero-shot ranking abilities
 
 LLMs have promising zero-shot ranking abilities, especially on candidates retrieved by multiple candidate generation models with different practical strategies.
 
 [reproduction scripts (coming soon)]
-
-[benchmark 2 (Table 3) (coming soon)]
 
 ### Observation 4. Biases exist in using LLMs to rank
 

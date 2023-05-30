@@ -53,6 +53,22 @@ By employing specifically designed promptings, such as recency-focused prompting
 
 > Pre-trained models can be downloaded following the instructions in [[downloading pre-trained models]](../llmrank/pretrained_models/README.md).
 
+- BPRMF
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    # python run_baseline.py -m BPR -d ml-1m
+    # mv xxx.pth pretrained_models/BPR-ml-1m.pth
+    python evaluate.py -m BPR -p pretrained_models/BPR-ml-1m.pth
+
+    # Games
+    # python run_baseline.py -m BPR -d Games
+    # mv xxx.pth pretrained_models/BPR-Games.pth
+    python evaluate.py -m BPR -d Games -p pretrained_models/BPR-Games.pth
+    ```
+
 - SASRec
 
     ```bash
