@@ -4,6 +4,6 @@ max_tokens: 512
 api_batch: 8
 temperature: 0.2
 async_dispatch: True
-
+boots: 0
 # Others
 max_his_len: 50
