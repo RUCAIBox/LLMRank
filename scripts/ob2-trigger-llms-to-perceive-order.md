@@ -49,6 +49,17 @@ By employing specifically designed promptings, such as recency-focused prompting
 
 **Baselines**
 
+- BM25
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m BM25
+
+    # Games
+    python evaluate.py -m BM25 -d Games
+
 ### Conventional Methods
 
 > Pre-trained models can be downloaded following the instructions in [[downloading pre-trained models]](../llmrank/pretrained_models/README.md).
