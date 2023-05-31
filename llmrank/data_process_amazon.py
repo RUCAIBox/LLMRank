@@ -28,7 +28,7 @@ def load_meta_items(file):
         for line in tqdm(fp, desc='Load metas'):
             data = json.loads(line)
             item = data['asin']
-            title = data['title']
+            title = data['title'].replace('\t',' ')
             if title == '':
                 continue
             brand = data['brand']
