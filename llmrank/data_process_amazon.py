@@ -125,7 +125,7 @@ def preprocess_rating(args):
     print(' Dataset: ', args.dataset)
 
     # load ratings
-    rating_file_path = os.path.join(args.input_path, 'Interaction', dataset_full_name + '.csv')
+    rating_file_path = os.path.join(args.input_path, 'Ratings', dataset_full_name + '.csv')
     rating_users, rating_items, rating_inters,  = load_ratings(rating_file_path)
 
     # load item IDs with meta data
