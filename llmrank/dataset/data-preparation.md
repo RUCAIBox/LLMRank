@@ -36,7 +36,7 @@ Here is an example.
 2. Process downstream datasets.
     ```
     cd llmrank/
-    python data_process_amazon.py -d Games
+    python data_process_amazon.py --dataset Games
     ```
     Note that following [[UniSRec]](https://github.com/RUCAIBox/UniSRec), we split the data into separate files for training, validation and evaluation: `.train.inter`, `.valid.inter`, `.test.inter` .
 
