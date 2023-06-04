@@ -80,7 +80,6 @@ class Rank(SequentialRecommender):
             """ 
             bootstrapping is adopted to alleviate position bias
             `fix_enc` is invalid in this case"""
-            origin_batch_size = idxs.shape[0]
             idxs = np.tile(idxs, [self.boots, 1])
             np.random.shuffle(idxs.T)
         batch_size = idxs.shape[0]

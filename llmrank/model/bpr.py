@@ -8,10 +8,10 @@ Reference:
 import torch
 import torch.nn as nn
 
-from recbole.model.abstract_recommender import SequentialRecommender,GeneralRecommender
+from recbole.model.abstract_recommender import SequentialRecommender
 from recbole.model.init import xavier_normal_initialization
 from recbole.model.loss import BPRLoss
-from recbole.utils import InputType, ModelType
+from recbole.utils import InputType
 
 
 class BPR(SequentialRecommender):

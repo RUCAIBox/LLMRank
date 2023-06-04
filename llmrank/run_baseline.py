@@ -10,7 +10,7 @@ from utils import get_model
 
 
 def run_baseline(model_name, dataset_name, **kwargs):
-    props = [f'props/{model_name}.yaml', 'props/overall.yaml',  f'props/{dataset_name}.yaml']
+    props = ['props/overall.yaml', f'props/{model_name}.yaml', f'props/{dataset_name}.yaml']
     print(props)
 
     model_class = get_model(model_name)
