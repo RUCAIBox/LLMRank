@@ -10,7 +10,7 @@ from utils import get_model
 
 
 def run_baseline(model_name, dataset_name, **kwargs):
-    props = [f'props/{model_name}.yaml', f'props/{dataset_name}.yaml', 'props/overall.yaml']
+    props = [f'props/{model_name}.yaml', 'props/overall.yaml',  f'props/{dataset_name}.yaml']
     print(props)
 
     model_class = get_model(model_name)
@@ -42,8 +42,8 @@ def run_baseline(model_name, dataset_name, **kwargs):
     logger.info(model)
 
     transform = construct_transform(config)
-    flops = get_flops(model, dataset, config["device"], logger, transform)
-    logger.info(set_color("FLOPs", "blue") + f": {flops}")
+    # flops = get_flops(model, dataset, config["device"], logger, transform)
+    # logger.info(set_color("FLOPs", "blue") + f": {flops}")
 
     # trainer loading and initialization
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
