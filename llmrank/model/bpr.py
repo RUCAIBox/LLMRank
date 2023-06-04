@@ -8,16 +8,16 @@ Reference:
 import torch
 import torch.nn as nn
 
-from recbole.model.abstract_recommender import SequentialRecommender
+from recbole.model.abstract_recommender import SequentialRecommender,GeneralRecommender
 from recbole.model.init import xavier_normal_initialization
 from recbole.model.loss import BPRLoss
-from recbole.utils import InputType
+from recbole.utils import InputType, ModelType
 
 
 class BPR(SequentialRecommender):
     r"""BPR is a basic matrix factorization model that be trained in the pairwise way."""
     input_type = InputType.PAIRWISE
-
+    
     def __init__(self, config, dataset):
         super(BPR, self).__init__(config, dataset)
         self.n_users = dataset.num(self.USER_ID)
@@ -64,7 +64,7 @@ class BPR(SequentialRecommender):
 
     def full_sort_predict(self, interaction):
         user = interaction[self.USER_ID]
-        user_e = self.get_user_embedding(user)
+        user_e = self.user_embedding(user)
         all_item_e = self.item_embedding.weight
         score = torch.matmul(user_e, all_item_e.transpose(0, 1))
         return score.view(-1)
