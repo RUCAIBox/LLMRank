@@ -61,6 +61,20 @@ By employing specifically designed promptings, such as recency-focused prompting
     python evaluate.py -m BM25 -d Games
     ```
 
+- UniSRec
+
+    Download `*.feat1CLS` and `*_item_dataset2row.npy` from [[link]](https://drive.google.com/drive/folders/16hdqUCNOj9M1dApWYN0iGND_0WoMRyGh?usp=share_link), and download `UniSRec-FHCKM-300.pth` from [[link]](https://drive.google.com/drive/folders/17Em-qAhZ8ybcBah3EdmAcQWfn1D8ONh-?usp=sharing).
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m UniSRec -p pretrained_models/UniSRec-FHCKM-300.pth
+
+    # Games
+    python evaluate.py -m UniSRec -d Games -p pretrained_models/UniSRec-FHCKM-300.pth
+    ```
+
 ### Conventional Methods
 
 > Pre-trained models can be downloaded following the instructions in [[downloading pre-trained models]](../llmrank/pretrained_models/README.md).

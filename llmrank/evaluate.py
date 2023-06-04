@@ -24,7 +24,11 @@ def evaluate(model_name, dataset_name, pretrained_file, **kwargs):
     logger.info(config)
 
     # dataset filtering
-    dataset = SequentialDataset(config)
+    if model_name == 'UniSRec':
+        from dataset import UniSRecDataset
+        dataset = UniSRecDataset(config)
+    else:
+        dataset = SequentialDataset(config)
     logger.info(dataset)
 
     # dataset splitting
