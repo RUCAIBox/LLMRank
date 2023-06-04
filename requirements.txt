@@ -1,3 +1,4 @@
-recbole==1.1.1
 pytorch==1.11.0
+cudatoolkit==11.3.1
+recbole==1.1.1
 openai==0.27.2
