@@ -27,6 +27,9 @@ def evaluate(model_name, dataset_name, pretrained_file, **kwargs):
     if model_name == 'UniSRec':
         from dataset import UniSRecDataset
         dataset = UniSRecDataset(config)
+    elif model_name == 'VQRec':
+        from dataset import VQRecDataset
+        dataset = VQRecDataset(config)
     else:
         dataset = SequentialDataset(config)
     logger.info(dataset)

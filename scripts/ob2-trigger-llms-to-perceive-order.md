@@ -75,6 +75,20 @@ By employing specifically designed promptings, such as recency-focused prompting
     python evaluate.py -m UniSRec -d Games -p pretrained_models/UniSRec-FHCKM-300.pth
     ```
 
+- VQ-Rec
+
+    Download `*.OPQ32,IVF1,PQ32x8.index` from [[link]](https://drive.google.com/drive/folders/16hdqUCNOj9M1dApWYN0iGND_0WoMRyGh?usp=share_link), and download `VQRec-FHCKM-300-20230315.pth` from [[link]](https://drive.google.com/drive/folders/17Em-qAhZ8ybcBah3EdmAcQWfn1D8ONh-?usp=sharing).
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m VQRec -p pretrained_models/VQRec-FHCKM-300-20230315.pth
+
+    # Games
+    python evaluate.py -m VQRec -d Games -p pretrained_models/VQRec-FHCKM-300-20230315.pth
+    ```
+
 ### Conventional Methods
 
 > Pre-trained models can be downloaded following the instructions in [[downloading pre-trained models]](../llmrank/pretrained_models/README.md).
