@@ -74,8 +74,8 @@ class BM25(SequentialRecommender):
         self.item_text = self.load_text()
 
         self.fake_fn = torch.nn.Linear(1, 1)
-        self.bm25_model = BM25_Model(self.item_text)
         self.encoded_item_text = self.load_segment_text(self.item_text)
+        self.bm25_model = BM25_Model(self.encoded_item_text)
 
     def load_text(self):
         token_text = {}
@@ -114,7 +114,8 @@ class BM25(SequentialRecommender):
         else:
             raise NotImplementedError()
 
-    def load_segment_text(self, input_text):
+    @staticmethod
+    def load_segment_text(input_text):
         all_text = []
         stopWords = set(stopwords.words('english'))
 
