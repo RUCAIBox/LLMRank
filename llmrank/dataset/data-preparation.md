@@ -43,3 +43,13 @@ Here is an example.
     Note that following [[UniSRec]](https://github.com/RUCAIBox/UniSRec), we split the data into separate files for training, validation and evaluation: `.train.inter`, `.valid.inter`, `.test.inter` .
 
 3. Repeat the second step in processing ML-1M datasets.
+
+## Auxiliary Files of UniSRec / VQ-Rec Preparation Guideline
+
+### UniSRec
+
+1. Generate item embedding from item related text (title).
+    ```
+    cd llmrank/
+    python dataset/unisrec_auxiliary_files_process.py
+    ```
