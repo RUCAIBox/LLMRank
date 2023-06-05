@@ -27,6 +27,9 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
 
         # BM25 (Candidate Generation Model)
         python evaluate.py -m Rank -d ${dataset} --max_his_len=5 --selected_user_suffix=bm25
+
+        # BERT (Candidate Generation Model)
+        python evaluate.py -m Rank -d ${dataset} --max_his_len=5 --selected_user_suffix=bert
     done
     ```
 
@@ -42,6 +45,9 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
 
         # BM25 (Candidate Generation Model)
         python evaluate.py -m BM25 -d ${dataset} --selected_user_suffix=bm25
+
+        # BERT (Candidate Generation Model)
+        python evaluate.py -m BM25 -d ${dataset} --selected_user_suffix=bert
     done
     ```
 
@@ -57,6 +63,9 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
 
         # BM25 (Candidate Generation Model)
         python evaluate.py -m Pop -d ${dataset} -p pretrained_models/Pop-${dataset}.pth --selected_user_suffix=bm25
+
+        # BERT (Candidate Generation Model)
+        python evaluate.py -m Pop -d ${dataset} -p pretrained_models/Pop-${dataset}.pth --selected_user_suffix=bert
     done
     ```
 
@@ -72,5 +81,8 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
 
         # BM25 (Candidate Generation Model)
         python evaluate.py -m SASRec -d ${dataset} -p pretrained_models/SASRec-${dataset}.pth --selected_user_suffix=bm25
+
+        # BERT (Candidate Generation Model)
+        python evaluate.py -m SASRec -d ${dataset} -p pretrained_models/SASRec-${dataset}.pth --selected_user_suffix=bert
     done
     ```

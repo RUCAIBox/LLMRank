@@ -12,11 +12,20 @@ from recbole.data import data_preparation
 from utils import get_model
 
 
+def write_sampled_candidates_to_file(selected_users, recall_items, dataset, file):
+    assert len(selected_users) == recall_items.shape[0]
+    for i, user in enumerate(selected_users):
+        selected_items = [dataset.field2id_token['item_id'][_] for _ in recall_items[i].tolist()]
+        file.write(f'{user}\t{" ".join(selected_items)}\n')
+
+
 def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
     if strategy == 'random':
         model_name = 'SASRec'
     elif strategy == 'bm25':
         model_name = 'BM25'
+    elif strategy == 'bert':
+        model_name = 'Rank'
     else:
         raise NotImplementedError()
     model_class = get_model(model_name)
@@ -75,10 +84,50 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
             all_item_score = torch.from_numpy(np.array(all_item_score))
             recall_items = torch.topk(all_item_score, n_cands)[1].numpy()
 
-            assert len(selected_users) == recall_items.shape[0]
-            for i, user in enumerate(selected_users):
-                selected_items = [dataset.field2id_token['item_id'][_] for _ in recall_items[i].tolist()]
-                file.write(f'{user}\t{" ".join(selected_items)}\n')
+            write_sampled_candidates_to_file(selected_users, recall_items, dataset, file)
+        elif strategy == 'bert':
+            from transformers import AutoModel, AutoTokenizer
+            tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+            bert = AutoModel.from_pretrained('bert-base-uncased').to(config['device'])
+
+            def get_user_text_list():
+                batch_user_ids = test_data.dataset.inter_feat['user_id'].numpy().tolist()
+                user_text_list = []
+                for i in range(selected_uids.shape[0]):
+                    pr = batch_user_ids.index(selected_uids[i])
+                    his_iids = [_ for _ in test_data.dataset.inter_feat['item_id_list'][pr].numpy().tolist() if _ != 0]
+                    user_text = [model.item_text[_] for _ in his_iids]
+                    user_text_list.append(' '.join(user_text))
+                return user_text_list
+
+            def get_bert_results(encode_text):
+                text_emb = []
+                batch_size = 128
+                encode_text = torch.split(encode_text, batch_size, dim=0)
+                for index, ids in enumerate(encode_text):
+                    input_id = ids
+                    with torch.no_grad():
+                        output_tuple = bert(input_id)
+
+                    output = output_tuple[1].detach()
+                    text_emb.append(output)
+                return torch.cat(text_emb, dim=0)
+
+            def bert_encode_text(text_input):
+                token_text = tokenizer.batch_encode_plus(text_input, max_length=512, truncation=True, padding='longest',
+                                                       return_tensors='pt')['input_ids'].to(config['device'])
+                text_emb = get_bert_results(token_text)
+                return text_emb
+
+            user_text_list = get_user_text_list()
+
+            user_text_emb = bert_encode_text(user_text_list).to(config['device'])
+            item_text_emb = bert_encode_text(model.item_text).to(config['device'])
+
+            user_item_sim = torch.matmul(user_text_emb, item_text_emb.transpose(0, 1))
+            recall_items = torch.topk(user_item_sim, n_cands)[1].cpu().numpy()
+
+            write_sampled_candidates_to_file(selected_users, recall_items, dataset, file)
         else:
             raise NotImplementedError()
 

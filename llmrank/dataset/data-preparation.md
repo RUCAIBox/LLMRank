@@ -21,7 +21,7 @@
 
     Then if `has_gt=True` (ground truth items are guaranteed to appear in the candidate set), the ground truth item will be appended into the candidate set (implemented in [`trainer.py`](../trainer.py), lines 70-90).
 
-3. For different candidate retrieval strategies, please replace `-s random` to `-s bm25` in step 2.
+3. For different candidate retrieval strategies, please replace `-s random` to `-s bm25`, `-s bert` in step 2.
 
 ### Amazon Review - Games (Games)
 
