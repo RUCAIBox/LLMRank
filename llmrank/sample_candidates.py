@@ -21,16 +21,17 @@ def write_sampled_candidates_to_file(selected_users, recall_items, dataset, file
 
 
 def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
-    if strategy == 'random':
-        model_name = 'SASRec'
-    elif strategy == 'bm25':
-        model_name = 'BM25'
-    elif strategy == 'bert':
-        model_name = 'Rank'
-    elif strategy == 'pop':
-        model_name = 'Pop'
-    else:
-        raise NotImplementedError()
+    strategy2model_name = {
+        'random': 'SASRec',
+        'bm25': 'BM25',
+        'bert': 'Rank',
+        'pop': 'Pop',
+        'bpr': 'BPR',
+        'gru4rec': 'GRU4Rec',
+        'sasrec': 'SASRec'
+    }
+    assert strategy in strategy2model_name, f'strategy [{strategy}] does not exist.'
+    model_name = strategy2model_name[strategy]
     model_class = get_model(model_name)
 
     # configurations initialization
@@ -53,7 +54,7 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
 
     # model loading and initialization
     model = model_class(config, train_data._dataset).to(config['device'])
-    if model_name in ['Pop']:
+    if model_name in ['Pop', 'BPR', 'GRU4Rec', 'SASRec']:
         chpt_path = f'pretrained_models/{model_name}-{dataset_name}.pth'
         checkpoint = torch.load(chpt_path, map_location=config['device'])
         model.load_state_dict(checkpoint["state_dict"])
@@ -137,7 +138,7 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
             recall_items = torch.topk(user_item_sim, n_cands)[1].cpu().numpy()
 
             write_sampled_candidates_to_file(selected_users, recall_items, dataset, file)
-        elif strategy == 'pop':
+        elif strategy in ['pop', 'bpr', 'gru4rec', 'sasrec']:
             score, recall_items = \
                 full_sort_topk(selected_uids, model=model, test_data=test_data, k=n_cands, device=config['device'])
             recall_items = recall_items.cpu().numpy()
