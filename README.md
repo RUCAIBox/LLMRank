@@ -53,6 +53,10 @@ By employing specifically designed promptings, such as recency-focused prompting
 
 LLMs have promising zero-shot ranking abilities, especially on candidates retrieved by multiple candidate generation models with different practical strategies.
 
+<div align="center"> 
+<img src='assets/tab-3.png' width="75%">
+</div>
+
 **Code is here ->** [[reproduction scripts]](scripts/ob3-zero-shot-abilities.md)
 
 ### Observation 4. Biases exist in using LLMs to rank

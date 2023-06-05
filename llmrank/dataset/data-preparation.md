@@ -20,8 +20,11 @@
     When we do experiments using `python evaluate.py -m Rank`, the number of items used to construct the candidate set depends on the hyperparameter `recall_budget`. For example, when `recall_budget=20`, the first 20 items of each line in `ml-1m.random` will be used.
 
     Then if `has_gt=True` (ground truth items are guaranteed to appear in the candidate set), the ground truth item will be appended into the candidate set (implemented in [`trainer.py`](../trainer.py), lines 70-90).
-
 3. For different candidate retrieval strategies, please replace `-s random` to `-s bm25`, `-s bert`, `-s pop`, `-s bpr`, `-s gru4rec`, or `-s sasrec` in step 2.
+4. For generating candidates which are retrieved by multiple strategies (`.rabmbepobpgrsa_3`, denotes for concatenating the first two letters of each strategy name).
+    ```bash
+    python mix_sources.py
+    ```
 
 ### Amazon Review - Games (Games)
 
