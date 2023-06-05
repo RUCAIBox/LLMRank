@@ -8,6 +8,7 @@ from recbole.config import Config
 from recbole.data.dataset.sequential_dataset import SequentialDataset
 from recbole.utils import init_seed, init_logger
 from recbole.data import data_preparation
+from recbole.utils.case_study import full_sort_topk
 
 from utils import get_model
 
@@ -26,6 +27,8 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
         model_name = 'BM25'
     elif strategy == 'bert':
         model_name = 'Rank'
+    elif strategy == 'pop':
+        model_name = 'Pop'
     else:
         raise NotImplementedError()
     model_class = get_model(model_name)
@@ -50,6 +53,12 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
 
     # model loading and initialization
     model = model_class(config, train_data._dataset).to(config['device'])
+    if model_name in ['Pop']:
+        chpt_path = f'pretrained_models/{model_name}-{dataset_name}.pth'
+        checkpoint = torch.load(chpt_path, map_location=config['device'])
+        model.load_state_dict(checkpoint["state_dict"])
+        model.load_other_parameter(checkpoint.get("other_parameter"))
+        logger.info("Loading model parameters from {}".format(chpt_path))
 
     # sample selected users
     selected_users = random.sample(dataset.field2id_token['user_id'][1:].tolist(), n_users)
@@ -127,6 +136,11 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
             user_item_sim = torch.matmul(user_text_emb, item_text_emb.transpose(0, 1))
             recall_items = torch.topk(user_item_sim, n_cands)[1].cpu().numpy()
 
+            write_sampled_candidates_to_file(selected_users, recall_items, dataset, file)
+        elif strategy == 'pop':
+            score, recall_items = \
+                full_sort_topk(selected_uids, model=model, test_data=test_data, k=n_cands, device=config['device'])
+            recall_items = recall_items.cpu().numpy()
             write_sampled_candidates_to_file(selected_users, recall_items, dataset, file)
         else:
             raise NotImplementedError()
