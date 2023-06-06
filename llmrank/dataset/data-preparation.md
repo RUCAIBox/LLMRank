@@ -56,3 +56,11 @@ Here is an example.
     cd llmrank/
     python dataset/unisrec_auxiliary_files_process.py
     ```
+
+### VQ-Rec
+
+1. Run step 1 of UniSRec to obtain `*.feat1CLS`.
+2. Generate the item index file.
+    ```
+    python dataset/vqrec_auxiliary_files_process.py --dataset ml-1m
+    ```
