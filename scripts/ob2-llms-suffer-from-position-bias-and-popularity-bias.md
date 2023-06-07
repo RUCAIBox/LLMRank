@@ -1,4 +1,4 @@
-## Observation 4. LLMs suffer from position bias and popularity bias 
+## Observation 2. LLMs suffer from position bias and popularity bias 
 
 LLMs suffer from position bias and popularity bias while ranking, which can be alleviated by specially designed prompting or bootstrapping strategies.
 
