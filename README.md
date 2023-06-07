@@ -4,6 +4,8 @@
 
 See our paper: [Large Language Models are Zero-Shot Rankers for Recommender Systems](https://arxiv.org/abs/2305.08845)
 
+***The code here is aligned with the new version in submission, please refer to [[arxiv-branch]](https://github.com/RUCAIBox/LLMRank/tree/arxiv) for the code that is aligned with our arXiv paper.***
+
 ## 🛍️ LLMs as Zero-Shot Rankers
 
 ![](assets/model.png)
