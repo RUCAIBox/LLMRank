@@ -99,12 +99,13 @@ class Rank(SequentialRecommender):
             user_his_text, candidate_text, candidate_text_order, candidate_idx = self.get_batch_inputs(interaction, idxs, i)
 
             response = openai_response['choices'][0]['message']['content']
-
+            response_list = response.split('\n')
+            
             self.logger.info(prompt_list[i])
             self.logger.info(response)
-
-            response_list = response.split('\n')
-
+            self.logger.info(f'Here are candidates: {candidate_text}')
+            self.logger.info(f'Here are answer: {response_list}')
+            
             if self.dataset_name == 'ml-1m':
                 rec_item_idx_list = self.parsing_output_text(scores, i, response_list, idxs, candidate_text)
             else:
