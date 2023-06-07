@@ -63,7 +63,7 @@ LLMs have promising zero-shot ranking abilities, especially on candidates retrie
 
 LLMs suffer from position bias and popularity bias while ranking, which can be alleviated by specially designed prompting or bootstrapping strategies.
 
-[reproduction scripts (coming soon)]
+**Code is here ->** [[reproduction scripts]](scripts/ob4-llms-suffer-from-position-bias-and-popularity-bias.md)
 
 ## 🌟 Acknowledgement
 
