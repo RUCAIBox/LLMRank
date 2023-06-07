@@ -10,7 +10,7 @@ Please refer to [Table 2](./ob2-trigger-llms-to-perceive-order.md).
 
 <div align="center"> 
 <img src='../assets/3-diff-strategies.png' width="75%">
-<div>Figure 3</div>
+<div>Figure 4</div>
 </div>
 
 For the scripts about generating `.bm25` et al., please refer to [[data-preparation]](../llmrank/dataset/data-preparation.md).
