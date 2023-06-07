@@ -33,13 +33,9 @@ We use LLMs as ranking models in an instruction-following paradigm. For each use
 
 > Please click the links below each "Observation" to find the code and scripts to reproduce the results.
 
-### Observation 1. LLMs struggle to perceive order of user histories
+### Observation 1. LLMs struggle to perceive order of user historie, but can be triggered to perceive the orders
 
 LLMs can utilize historical behaviors for personalized ranking, but *struggle to perceive the order* of the given sequential interaction histories.
-
-**Code is here ->** [[reproduction scripts]](scripts/ob1-struggle-to-perceive-order.md)
-
-### Observation 2. LLMs can be triggered to perceive the orders
 
 By employing specifically designed promptings, such as recency-focused prompting and in-context learning, *LLMs can be triggered to perceive the order* of historical user behaviors, leading to improved ranking performance.
 
@@ -47,7 +43,19 @@ By employing specifically designed promptings, such as recency-focused prompting
 <img src='assets/tab-2.png' width="75%">
 </div>
 
-**Code is here ->** [[reproduction scripts]](scripts/ob2-trigger-llms-to-perceive-order.md)
+
+**Code is here ->** [[reproduction scripts]](scripts/ob1-struggle-to-perceive-order-but-can-be-triggered.md)
+
+### Observation 2. Biases exist in using LLMs to rank
+
+LLMs suffer from position bias and popularity bias while ranking, which can be alleviated by specially designed prompting or bootstrapping strategies.
+
+<div align="center"> 
+<img src='assets/2-biases-exist-in-using-llms-to-rank.png' width="75%">
+</div>
+
+**Code is here ->** [[reproduction scripts]](scripts/ob4-llms-suffer-from-position-bias-and-popularity-bias.md)
+
 
 ### Observation 3. Promising zero-shot ranking abilities
 
@@ -59,11 +67,7 @@ LLMs have promising zero-shot ranking abilities, especially on candidates retrie
 
 **Code is here ->** [[reproduction scripts]](scripts/ob3-zero-shot-abilities.md)
 
-### Observation 4. Biases exist in using LLMs to rank
 
-LLMs suffer from position bias and popularity bias while ranking, which can be alleviated by specially designed prompting or bootstrapping strategies.
-
-**Code is here ->** [[reproduction scripts]](scripts/ob4-llms-suffer-from-position-bias-and-popularity-bias.md)
 
 ## 🌟 Acknowledgement
 

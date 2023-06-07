@@ -1,4 +1,73 @@
-## Observation 2. LLMs can be triggered to perceive the orders
+## Observation 1. LLMs struggle to perceive order of user historie, but can be triggered to perceive the orders
+
+LLMs can utilize historical behaviors for personalized ranking, but struggle to perceive the order of the given sequential interaction histories.
+
+By employing specifically designed promptings, such as recency-focused prompting and in-context learning, LLMs can be triggered to perceive the order of historical user behaviors, leading to improved ranking performance.
+
+
+### LLMs struggle to perceive the order of the given historical user behaviors.**
+
+<div align="center"> 
+<img src='../assets/1-a-perceive-order.png' width="30%">
+<div>Figure 2 (a)</div>
+</div>
+
+- Ours
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m Rank
+
+    # Games
+    python evaluate.py -m Rank -d Games
+    ```
+
+- Ours (Random Order)
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m RandOrder
+
+    # Games
+    python evaluate.py -m RandOrder -d Games
+    ```
+
+- Ours (Fake History)
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m FakeHis
+
+    # Games
+    python evaluate.py -m FakeHis -d Games
+    ```
+
+<div align="center"> 
+<img src='../assets/1-b-his-len.png' width="30%">
+<div>Figure 2 (c)</div>
+</div>
+
+- Ours
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    for length in 5 10 20 50
+    do
+        python evaluate.py -m Rank --max_his_len=${length}
+    done
+    ```
+
+
+
+### LLMs can be triggered to perceive the orders.**
 
 By employing specifically designed promptings, such as recency-focused prompting and in-context learning, *LLMs can be triggered to perceive the order* of historical user behaviors, leading to improved ranking performance.
 
@@ -7,7 +76,7 @@ By employing specifically designed promptings, such as recency-focused prompting
 <div>Table 2</div>
 </div>
 
-### Zero-Shot Methods
+#### Zero-Shot Methods
 
 **Ours**
 
@@ -89,7 +158,7 @@ By employing specifically designed promptings, such as recency-focused prompting
     python evaluate.py -m VQRec -d Games -p pretrained_models/VQRec-FHCKM-300-20230315.pth
     ```
 
-### Conventional Methods
+#### Conventional Methods
 
 > Pre-trained models can be downloaded following the instructions in [[downloading pre-trained models]](../llmrank/pretrained_models/README.md).
 
@@ -140,3 +209,4 @@ By employing specifically designed promptings, such as recency-focused prompting
     # mv xxx.pth pretrained_models/SASRec-Games.pth
     python evaluate.py -m SASRec -d Games -p pretrained_models/SASRec-Games.pth
     ```
+
