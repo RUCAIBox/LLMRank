@@ -5,7 +5,7 @@ LLMs can utilize historical behaviors for personalized ranking, but struggle to 
 By employing specifically designed promptings, such as recency-focused prompting and in-context learning, LLMs can be triggered to perceive the order of historical user behaviors, leading to improved ranking performance.
 
 
-**LLMs struggle to perceive the order of the given historical user behaviors.**
+### LLMs struggle to perceive the order of the given historical user behaviors.**
 
 <div align="center"> 
 <img src='../assets/1-a-perceive-order.png' width="30%">
@@ -67,7 +67,7 @@ By employing specifically designed promptings, such as recency-focused prompting
 
 
 
-**LLMs can be triggered to perceive the orders.**
+### LLMs can be triggered to perceive the orders.**
 
 By employing specifically designed promptings, such as recency-focused prompting and in-context learning, *LLMs can be triggered to perceive the order* of historical user behaviors, leading to improved ranking performance.
 
@@ -76,7 +76,7 @@ By employing specifically designed promptings, such as recency-focused prompting
 <div>Table 2</div>
 </div>
 
-### Zero-Shot Methods
+#### Zero-Shot Methods
 
 **Ours**
 
@@ -158,7 +158,7 @@ By employing specifically designed promptings, such as recency-focused prompting
     python evaluate.py -m VQRec -d Games -p pretrained_models/VQRec-FHCKM-300-20230315.pth
     ```
 
-### Conventional Methods
+#### Conventional Methods
 
 > Pre-trained models can be downloaded following the instructions in [[downloading pre-trained models]](../llmrank/pretrained_models/README.md).
 
