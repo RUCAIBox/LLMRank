@@ -6,11 +6,11 @@ LLMs suffer from position bias and popularity bias while ranking, which can be a
 **The order of candidates affects the ranking results of LLMs**
 
 <div align="center"> 
-<img src='../assets/4-a-pos_bias.png' width="30%">
-<div>Figure 5 (a)</div>
+<img src='../assets/2-a-pos_bias.png' width="30%">
+<div>Figure 3 (a)</div>
 </div>
 
-We vary the position of ground-truth items at {0, 5, 10, 15, 19} and present the ranking results in Figure 5 (a).
+We vary the position of ground-truth items at {0, 5, 10, 15, 19} and present the ranking results in Figure 3 (a).
 
 - We first write a bash script file.
 
@@ -36,8 +36,8 @@ We vary the position of ground-truth items at {0, 5, 10, 15, 19} and present the
 **Alleviating position bias via bootstrapping**
 
 <div align="center"> 
-<img src='../assets/4-c-bootstrapping.png' width="30%">
-<div>Figure 5 (c)</div>
+<img src='../assets/2-c-bootstrapping.png' width="30%">
+<div>Figure 3 (c)</div>
 </div>
 
 We rank the candidate set repeatedly for $B$ times, with candidates randomly shuffled at each round.
@@ -69,8 +69,8 @@ We rank the candidate set repeatedly for $B$ times, with candidates randomly shu
 **Popularity degrees of candidates affect ranking results of LLMs**
 
 <div align="center"> 
-<img src='../assets/4-b-pop_bias.png' width="30%">
-<div>Figure 5 (b)</div>
+<img src='../assets/2-b-pop_bias.png' width="30%">
+<div>Figure 3 (b)</div>
 </div>
 
 
@@ -91,8 +91,8 @@ We report the item popularity score at each position of the ranked item lists (p
 **Making LLMs focus on historical interactions helps reduce popularity bias**
 
 <div align="center"> 
-<img src='../assets/4-d-pop_len.png' width="30%">
-<div>Figure 5 (d)</div>
+<img src='../assets/2-d-pop_len.png' width="30%">
+<div>Figure 3 (d)</div>
 </div>
 
 We instruct LLMs to focus on histroical interacctions, thereby reducing the effects of popularity bias.
