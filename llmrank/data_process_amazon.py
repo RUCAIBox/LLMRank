@@ -206,28 +206,26 @@ def convert_to_atomic_files(args, all_data):
     with open(os.path.join(args.output_path, args.dataset, f'{args.dataset}_id.inter'), 'w') as file:
         file.write('user_id:token\titem_id_list:token_seq\n')
         for uid in uid_list:
-            item_seq = all_data[uid][-args.max_length:]
+            item_seq = all_data[uid]
             file.write(f'{uid}\t{" ".join(item_seq)}\n')
 
     with open(os.path.join(args.output_path, args.dataset, f'{args.dataset}.train.inter'), 'w') as f1:
-        with open(os.path.join(args.output_path, args.dataset, f'{args.dataset}.test.inter'), 'w') as f2:
-            with open(os.path.join(args.output_path, args.dataset, f'{args.dataset}.valid.inter'), 'w') as f3:
+        with open(os.path.join(args.output_path, args.dataset, f'{args.dataset}.valid.inter'), 'w') as f2:
+            with open(os.path.join(args.output_path, args.dataset, f'{args.dataset}.test.inter'), 'w') as f3:
                 f1.write('user_id:token\titem_id_list:token_seq\titem_id:token\n')
                 f2.write('user_id:token\titem_id_list:token_seq\titem_id:token\n')
                 f3.write('user_id:token\titem_id_list:token_seq\titem_id:token\n')
                 for user, item_list in all_data.items():
-                    item_list = item_list[-args.max_length:]
                     test_target_item = item_list[-1]
-                    test_list = item_list[:-1]
+                    test_list = item_list[:-1][-args.max_length:]
                     f3.write(str(user)+'\t'+' '.join([str(item) for item in test_list])+'\t'+str(test_target_item)+'\n')
                     valid_target_item = item_list[-2]
-                    valid_list = item_list[:-2]
+                    valid_list = item_list[:-2][-args.max_length:]
                     f2.write(str(user)+'\t'+' '.join([str(item) for item in valid_list])+'\t'+str(valid_target_item)+'\n')
-                    train_target_item = item_list[-3]
-                    train_list = item_list[:-3]
+                    train_list = item_list[:-2]
                     for i in range(1,len(train_list)):
-                        sub_item_list = train_list[:i]
-                        sub_target_item = train_list[i]
+                        sub_item_list = train_list[:-i][-args.max_length:]
+                        sub_target_item = train_list[-i]
                         f1.write(str(user)+'\t'+' '.join([str(item) for item in sub_item_list])+'\t'+str(sub_target_item)+'\n')
                     f1.write(str(user)+'\t'+' '.join([str(item) for item in train_list])+'\t'+str(train_target_item)+'\n')
 
