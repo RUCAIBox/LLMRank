@@ -56,7 +56,7 @@ LLMs suffer from position bias and popularity bias while ranking, which can be a
 <img src='assets/2-biases-exist-in-using-llms-to-rank.png' width="75%">
 </div>
 
-**Code is here ->** [[reproduction scripts]](scripts/ob4-llms-suffer-from-position-bias-and-popularity-bias.md)
+**Code is here ->** [[reproduction scripts]](scripts/ob2-llms-suffer-from-position-bias-and-popularity-bias.md)
 
 
 ### Observation 3. Promising zero-shot ranking abilities
