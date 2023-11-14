@@ -53,7 +53,7 @@ def load_item_text_list(args,):
 
 def load_plm(model_name='bert-base-uncased'):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModel.from_pretrained('/mnt/zhangjunjie/bert-base-uncased')
+    model = AutoModel.from_pretrained('bert-base-uncased')
     return tokenizer, model
 
 def set_device(gpu_id):
