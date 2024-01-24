@@ -18,10 +18,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m Rank
+    python evaluate.py -m Rank -d ml-1m-full
 
     # Games
-    python evaluate.py -m Rank -d Games
+    python evaluate.py -m Rank -d Games-6k
     ```
 
 - Ours (Random Order)
@@ -30,10 +30,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m RandOrder
+    python evaluate.py -m RandOrder -d ml-1m-full
 
     # Games
-    python evaluate.py -m RandOrder -d Games
+    python evaluate.py -m RandOrder -d Games-6k
     ```
 
 - Ours (Fake History)
@@ -42,15 +42,15 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m FakeHis
+    python evaluate.py -m FakeHis -d ml-1m-full
 
     # Games
-    python evaluate.py -m FakeHis -d Games
+    python evaluate.py -m FakeHis -d Games-6k
     ```
 
 <div align="center"> 
 <img src='../assets/1-b-his-len.png' width="30%">
-<div>Figure 2 (c)</div>
+<div>Figure 2 (b)</div>
 </div>
 
 - Ours
@@ -61,7 +61,7 @@ By employing specifically designed promptings, such as recency-focused prompting
     # ML-1M
     for length in 5 10 20 50
     do
-        python evaluate.py -m Rank --max_his_len=${length}
+        python evaluate.py -m Rank --max_his_len=${length} -d ml-1m-full
     done
     ```
 
@@ -86,10 +86,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m Rank
+    python evaluate.py -m Rank -d ml-1m-full
 
     # Games
-    python evaluate.py -m Rank -d Games
+    python evaluate.py -m Rank -d Games-6k
     ```
 
 - Recency-Focused [[code]](../llmrank/model/rf.py)
@@ -98,10 +98,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m RF
+    python evaluate.py -m RF -d ml-1m-full
 
     # Games
-    python evaluate.py -m RF -d Games
+    python evaluate.py -m RF -d Games-6k
     ```
 
 - In-Context Learning [[code]](../llmrank/model/icl.py)
@@ -110,10 +110,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m ICL
+    python evaluate.py -m ICL -d ml-1m-full
 
     # Games
-    python evaluate.py -m ICL -d Games
+    python evaluate.py -m ICL -d Games-6k
     ```
 
 **Baselines**
@@ -124,10 +124,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m BM25
+    python evaluate.py -m BM25 -d ml-1m-full
 
     # Games
-    python evaluate.py -m BM25 -d Games
+    python evaluate.py -m BM25 -d Games-6k
     ```
 
 - UniSRec
@@ -138,10 +138,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m UniSRec -p pretrained_models/UniSRec-FHCKM-300.pth
+    python evaluate.py -m UniSRec -d ml-1m-full -p pretrained_models/UniSRec-FHCKM-300.pth
 
     # Games
-    python evaluate.py -m UniSRec -d Games -p pretrained_models/UniSRec-FHCKM-300.pth
+    python evaluate.py -m UniSRec -d Games-6k -p pretrained_models/UniSRec-FHCKM-300.pth
     ```
 
 - VQ-Rec
@@ -152,10 +152,10 @@ By employing specifically designed promptings, such as recency-focused prompting
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m VQRec -p pretrained_models/VQRec-FHCKM-300-20230315.pth
+    python evaluate.py -m VQRec -d ml-1m-full -p pretrained_models/VQRec-FHCKM-300-20230315.pth
 
     # Games
-    python evaluate.py -m VQRec -d Games -p pretrained_models/VQRec-FHCKM-300-20230315.pth
+    python evaluate.py -m VQRec -d Games-6k -p pretrained_models/VQRec-FHCKM-300-20230315.pth
     ```
 
 #### Conventional Methods
@@ -170,12 +170,12 @@ By employing specifically designed promptings, such as recency-focused prompting
     # ML-1M
     # python run_baseline.py -m BPR -d ml-1m
     # mv xxx.pth pretrained_models/BPR-ml-1m.pth
-    python evaluate.py -m BPR -p pretrained_models/BPR-ml-1m.pth
+    python evaluate.py -m BPR -d ml-1m-full -p pretrained_models/BPR-ml-1m.pth
 
     # Games
     # python run_baseline.py -m BPR -d Games
     # mv xxx.pth pretrained_models/BPR-Games.pth
-    python evaluate.py -m BPR -d Games -p pretrained_models/BPR-Games.pth
+    python evaluate.py -m BPR -d Games-6k -p pretrained_models/BPR-Games.pth
     ```
 
 - Pop
@@ -186,12 +186,12 @@ By employing specifically designed promptings, such as recency-focused prompting
     # ML-1M
     # python run_baseline.py -m Pop -d ml-1m
     # mv xxx.pth pretrained_models/Pop-ml-1m.pth
-    python evaluate.py -m Pop -p pretrained_models/Pop-ml-1m.pth
+    python evaluate.py -m Pop -d ml-1m-full -p pretrained_models/Pop-ml-1m.pth
 
     # Games
     # python run_baseline.py -m Pop -d Games
     # mv xxx.pth pretrained_models/Pop-Games.pth
-    python evaluate.py -m Pop -d Games -p pretrained_models/Pop-Games.pth
+    python evaluate.py -m Pop -d Games-6k -p pretrained_models/Pop-Games.pth
     ```
 
 - SASRec
@@ -202,11 +202,11 @@ By employing specifically designed promptings, such as recency-focused prompting
     # ML-1M
     # python run_baseline.py -m SASRec -d ml-1m
     # mv xxx.pth pretrained_models/SASRec-ml-1m.pth
-    python evaluate.py -m SASRec -p pretrained_models/SASRec-ml-1m.pth
+    python evaluate.py -m SASRec -d ml-1m-full -p pretrained_models/SASRec-ml-1m.pth
 
     # Games
     # python run_baseline.py -m SASRec -d Games
     # mv xxx.pth pretrained_models/SASRec-Games.pth
-    python evaluate.py -m SASRec -d Games -p pretrained_models/SASRec-Games.pth
+    python evaluate.py -m SASRec -d Games-6k -p pretrained_models/SASRec-Games.pth
     ```
 

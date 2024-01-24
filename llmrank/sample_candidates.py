@@ -113,19 +113,29 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
             def get_bert_results(encode_text):
                 text_emb = []
                 batch_size = 128
-                encode_text = torch.split(encode_text, batch_size, dim=0)
-                for index, ids in enumerate(encode_text):
-                    input_id = ids
+                attn_mask = torch.split(encode_text['attention_mask'], batch_size, dim=0)
+                encode_ids = torch.split(encode_text['input_ids'], batch_size, dim=0)
+                for index, ids in enumerate(encode_ids):
+                    input_id = ids.to(config['device'])
+                    mask = attn_mask[index].to(config['device'])
                     with torch.no_grad():
-                        output_tuple = bert(input_id)
-
-                    output = output_tuple[1].detach()
+                        output_tuple = bert(
+                            input_id,
+                            attention_mask=mask
+                        )
+                    output = output_tuple[0][:,0,:].detach().cpu()
                     text_emb.append(output)
                 return torch.cat(text_emb, dim=0)
 
             def bert_encode_text(text_input):
-                token_text = tokenizer.batch_encode_plus(text_input, max_length=512, truncation=True, padding='longest',
-                                                       return_tensors='pt')['input_ids'].to(config['device'])
+                token_text = tokenizer.batch_encode_plus(
+                    text_input,
+                    max_length=512,
+                    truncation=True,
+                    padding='longest',
+                    return_attention_mask=True,
+                    return_tensors='pt'
+                )
                 text_emb = get_bert_results(token_text)
                 return text_emb
 
@@ -134,7 +144,7 @@ def sample_candidates(dataset_name, strategy, n_users, n_cands, **kwargs):
             user_text_emb = bert_encode_text(user_text_list).to(config['device'])
             item_text_emb = bert_encode_text(model.item_text).to(config['device'])
 
-            user_item_sim = torch.matmul(user_text_emb, item_text_emb.transpose(0, 1))
+            user_item_sim = torch.matmul(user_text_emb.to(config['device']), item_text_emb.transpose(0, 1).to(config['device']))
             recall_items = torch.topk(user_item_sim, n_cands)[1].cpu().numpy()
 
             write_sampled_candidates_to_file(selected_users, recall_items, dataset, file)

@@ -4,12 +4,68 @@ LLMs have promising zero-shot ranking abilities, especially on candidates retrie
 
 **LLMs have promising zero-shot ranking abilities.**
 
-Please refer to [Table 2](./ob2-trigger-llms-to-perceive-order.md).
+<div align="center"> 
+<img src='../assets/tab-3.png' width="75%">
+<div>Table 3</div>
+</div>
+
+**LLMs**
+
+- ChatGPT [[code]](../llmrank/model/rf.py)
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m RF -d ml-1m
+
+    # Games
+    python evaluate.py -m RF -d Games
+    ```
+
+- GPT-4 [[code]](../llmrank/model/rf.py)
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m RF -d ml-1m --api_name=gpt-4
+
+    # Games
+    python evaluate.py -m RF -d Games --api_name=gpt-4
+    ```
+
+**Baselines**
+
+- BM25
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m BM25 -d ml-1m
+
+    # Games
+    python evaluate.py -m BM25 -d Games
+    ```
+
+- UniSRec
+
+
+    ```bash
+    cd llmrank/
+
+    # ML-1M
+    python evaluate.py -m UniSRec -d ml-1m -p pretrained_models/UniSRec-FHCKM-300.pth
+
+    # Games
+    python evaluate.py -m UniSRec -d Games -p pretrained_models/UniSRec-FHCKM-300.pth
+    ```
 
 **LLMs rank candidates based on item popularity, text features as well as user behaviors.**
 
 <div align="center"> 
-<img src='../assets/3-diff-strategies.png' width="75%">
+<img src='../assets/4-diff-strategies.png' width="75%">
 <div>Figure 4</div>
 </div>
 
@@ -74,7 +130,7 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
 **LLMs can effectively rank candidates retrieved by multiple candidate generation models.**
 
 <div align="center"> 
-<img src='../assets/tab-3.png' width="75%">
+<img src='../assets/tab-4.png' width="75%">
 <div>Table 3</div>
 </div>
 
@@ -90,16 +146,16 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m RF \
-        --boots=1 \
+    python evaluate.py -m RF -d ml-1m-full \
+        --boots=3 \
         --max_his_len=5 \
         --recall_budget=21 \
         --has_gt=False \
         --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
-    python evaluate.py -m RF -d Games \
-        --boots=1 \
+    python evaluate.py -m RF -d Games-6k \
+        --boots=3 \
         --max_his_len=5 \
         --recall_budget=21 \
         --has_gt=False \
@@ -114,10 +170,10 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m BM25 --has_gt=False --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m BM25 -d ml-1m-full --recall_budget=21 --has_gt=False --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
-    python evaluate.py -m BM25 -d Games --has_gt=False --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m BM25 -d Games-6k --recall_budget=21 --has_gt=False --selected_user_suffix=rabmbepobpgrsa_3
     ```
 
 - UniSRec
@@ -128,10 +184,10 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m UniSRec --has_gt=False -p pretrained_models/UniSRec-FHCKM-300.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m UniSRec -d ml-1m-full --recall_budget=21 --has_gt=False -p pretrained_models/UniSRec-FHCKM-300.pth --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
-    python evaluate.py -m UniSRec -d Games --has_gt=False -p pretrained_models/UniSRec-FHCKM-300.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m UniSRec -d Games-6k --recall_budget=21 --has_gt=False -p pretrained_models/UniSRec-FHCKM-300.pth --selected_user_suffix=rabmbepobpgrsa_3
     ```
 
 - VQ-Rec
@@ -142,10 +198,10 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m VQRec --has_gt=False -p pretrained_models/VQRec-FHCKM-300-20230315.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m VQRec -d ml-1m-full --recall_budget=21 --has_gt=False -p pretrained_models/VQRec-FHCKM-300-20230315.pth --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
-    python evaluate.py -m VQRec -d Games --has_gt=False -p pretrained_models/VQRec-FHCKM-300-20230315.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m VQRec -d Games-6k --recall_budget=21 --has_gt=False -p pretrained_models/VQRec-FHCKM-300-20230315.pth --selected_user_suffix=rabmbepobpgrsa_3
     ```
 
 ### Conventional Methods
@@ -160,12 +216,12 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     # ML-1M
     # python run_baseline.py -m BPR -d ml-1m
     # mv xxx.pth pretrained_models/BPR-ml-1m.pth
-    python evaluate.py -m BPR --has_gt=False -p pretrained_models/BPR-ml-1m.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m BPR -d ml-1m-full --recall_budget=21 --has_gt=False -p pretrained_models/BPR-ml-1m.pth --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
     # python run_baseline.py -m BPR -d Games
     # mv xxx.pth pretrained_models/BPR-Games.pth
-    python evaluate.py -m BPR -d Games --has_gt=False -p pretrained_models/BPR-Games.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m BPR -d Games-6k --recall_budget=21 --has_gt=False -p pretrained_models/BPR-Games.pth --selected_user_suffix=rabmbepobpgrsa_3
     ```
 
 - Pop
@@ -176,12 +232,12 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     # ML-1M
     # python run_baseline.py -m Pop -d ml-1m
     # mv xxx.pth pretrained_models/Pop-ml-1m.pth
-    python evaluate.py -m Pop --has_gt=False -p pretrained_models/Pop-ml-1m.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m Pop -d ml-1m-full --recall_budget=21 --has_gt=False -p pretrained_models/Pop-ml-1m.pth --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
     # python run_baseline.py -m Pop -d Games
     # mv xxx.pth pretrained_models/Pop-Games.pth
-    python evaluate.py -m Pop -d Games --has_gt=False -p pretrained_models/Pop-Games.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m Pop -d Games-6k --recall_budget=21 --has_gt=False -p pretrained_models/Pop-Games.pth --selected_user_suffix=rabmbepobpgrsa_3
     ```
 
 - SASRec
@@ -192,10 +248,10 @@ For the scripts about generating `.bm25` et al., please refer to [[data-preparat
     # ML-1M
     # python run_baseline.py -m SASRec -d ml-1m
     # mv xxx.pth pretrained_models/SASRec-ml-1m.pth
-    python evaluate.py -m SASRec --has_gt=False -p pretrained_models/SASRec-ml-1m.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m SASRec -d ml-1m-full --recall_budget=21 --has_gt=False -p pretrained_models/SASRec-ml-1m.pth --selected_user_suffix=rabmbepobpgrsa_3
 
     # Games
     # python run_baseline.py -m SASRec -d Games
     # mv xxx.pth pretrained_models/SASRec-Games.pth
-    python evaluate.py -m SASRec -d Games --has_gt=False -p pretrained_models/SASRec-Games.pth --selected_user_suffix=rabmbepobpgrsa_3
+    python evaluate.py -m SASRec -d Games-6k --recall_budget=21 --has_gt=False -p pretrained_models/SASRec-Games.pth --selected_user_suffix=rabmbepobpgrsa_3
     ```

@@ -81,7 +81,7 @@ class BM25(SequentialRecommender):
         token_text = {}
         item_text = ['[PAD]']
         feat_path = osp.join(self.data_path, f'{self.dataset_name}.item')
-        if self.dataset_name == 'ml-1m':
+        if self.dataset_name in ['ml-1m', 'ml-1m-full']:
             with open(feat_path, 'r', encoding='utf-8') as file:
                 file.readline()
                 for line in file:
@@ -96,7 +96,7 @@ class BM25(SequentialRecommender):
                     raw_text = 'A ' + raw_text[:-3]
                 item_text.append(raw_text)
             return item_text
-        elif self.dataset_name == 'Games':
+        elif self.dataset_name in ['Games', 'Games-6k']:
             with open(feat_path, 'r', encoding='utf-8') as file:
                 file.readline()
                 for line in file:
