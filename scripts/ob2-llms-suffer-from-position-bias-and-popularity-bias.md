@@ -17,13 +17,13 @@ We vary the position of ground-truth items at {0, 5, 10, 15, 19} and present the
     ```bash
     # ML-1M
     for pos in 0 5 10 15 19 ; do
-      python evaluate.py -m Rank -d ml-1m --fix_pos=$pos
+      python evaluate.py -m Rank -d ml-1m-full --fix_pos=$pos
     done
     ```
     ```bash
     # Games
     for pos in 0 5 10 15 19 ; do
-      python evaluate.py -m Rank -d Games --fix_pos=$pos
+      python evaluate.py -m Rank -d Games-6k --fix_pos=$pos
     done
     ```
  - Then we execute the bash script file.
@@ -36,8 +36,8 @@ We vary the position of ground-truth items at {0, 5, 10, 15, 19} and present the
 **Alleviating position bias via bootstrapping**
 
 <div align="center"> 
-<img src='../assets/2-c-bootstrapping.png' width="30%">
-<div>Figure 3 (c)</div>
+<img src='../assets/2-b-bootstrapping.png' width="30%">
+<div>Figure 3 (b)</div>
 </div>
 
 We rank the candidate set repeatedly for $B$ times, with candidates randomly shuffled at each round.
@@ -48,10 +48,10 @@ We rank the candidate set repeatedly for $B$ times, with candidates randomly shu
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m Rank
+    python evaluate.py -m Rank -d ml-1m-full
 
     # Games
-    python evaluate.py -m Rank -d Games
+    python evaluate.py -m Rank -d Games-6k
     ```
 
 - Ours + bootstrapping
@@ -60,17 +60,17 @@ We rank the candidate set repeatedly for $B$ times, with candidates randomly shu
     cd llmrank/
 
     # ML-1M
-    python evaluate.py -m Rank --boots=3
+    python evaluate.py -m Rank -d ml-1m-full --boots=3
 
     # Games
-    python evaluate.py -m Rank -d Games --boots=3
+    python evaluate.py -m Rank -d Games-6k --boots=3
     ```
 
 **Popularity degrees of candidates affect ranking results of LLMs**
 
 <div align="center"> 
-<img src='../assets/2-b-pop_bias.png' width="30%">
-<div>Figure 3 (b)</div>
+<img src='../assets/2-c-pop_bias.png' width="30%">
+<div>Figure 3 (c)</div>
 </div>
 
 
@@ -101,13 +101,13 @@ We instruct LLMs to focus on histroical interacctions, thereby reducing the effe
     ```bash
     # ML-1M
     for his_len in 5 10 20 30 40 50 ; do
-      python evaluate.py -m Rank -d ml-1m --max_his_len=$his_len
+      python evaluate.py -m Rank -d ml-1m-full --max_his_len=$his_len
     done
     ```
     ```bash
     # Games
     for his_len in 5 10 20 30 40 50 ; do
-      python evaluate.py -m Rank -d Games --max_his_len=$his_len
+      python evaluate.py -m Rank -d Games-6k --max_his_len=$his_len
     done
     ```
  - Then we execute the bash script file.

@@ -1,0 +1,4 @@
+load_col:
+    inter: [user_id, item_id_list, item_id]
+benchmark_filename: [train, valid, test]
+alias_of_item_id: [item_id_list]

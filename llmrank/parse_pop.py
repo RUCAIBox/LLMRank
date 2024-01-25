@@ -11,7 +11,7 @@ def load_text(config, dataset):
     item_text = ['[PAD]']
     feat_path = osp.join(config['data_path'], f"{dataset.dataset_name}.item")
     id_token = dataset.field2id_token['item_id']
-    if dataset.dataset_name == 'ml-1m':
+    if dataset.dataset_name in ['ml-1m', 'ml-1m-full']:
         with open(feat_path, 'r', encoding='utf-8') as file:
             file.readline()
             for line in file:
@@ -26,7 +26,7 @@ def load_text(config, dataset):
                 raw_text = 'A ' + raw_text[:-3]
             item_text.append(raw_text)
         return item_text
-    elif dataset.dataset_name in ['Games', 'Arts', 'OR', 'Scientific', 'Luxury', 'Software']:
+    elif dataset.dataset_name in ['Games', 'Games-6k']:
         with open(feat_path, 'r', encoding='utf-8') as file:
             file.readline()
             for line in file:
@@ -84,7 +84,7 @@ def parse(model_name, dataset_name,log_path, **kwargs):
         candidate_text = None
         for line in f:
             line = line.strip()
-            if dataset_name == 'ml-1m':
+            if dataset_name in ['ml-1m', 'ml-1m-full']:
                 if "Here are answer: " in line:
                     try:
                         ans_movies = eval(line[line.index("Here are answer: ") + len("Here are answer: "):])
@@ -101,7 +101,7 @@ def parse(model_name, dataset_name,log_path, **kwargs):
                             movie_name = order_movie
                         if i >= config['recall_budget'] or movie_name not in item_title_pop: continue
                         user_reco_pop[uid][i] = item_title_pop[movie_name]
-            elif dataset_name in ['Games','Software']:
+            elif dataset_name in ['Games', 'Games-6k']:
                 if "Here are candidates: " in line:
                     candidate_text = eval(line[line.index("Here are candidates: ") + len("Here are candidates: "):])
                 if "Here are answer: " in line:

@@ -1,10 +1,8 @@
 # LLMRank
 
-**LLMRank** aims to investigate the capacity of LLMs that act as the ranking model for recommender systems.
+**LLMRank** aims to investigate the capacity of LLMs that act as the ranking model for recommender systems. [[paper]](https://arxiv.org/abs/2305.08845)
 
-See our paper: [Large Language Models are Zero-Shot Rankers for Recommender Systems](https://arxiv.org/abs/2305.08845)
-
-***The code here is aligned with the new version in submission, please refer to [[arxiv-branch]](https://github.com/RUCAIBox/LLMRank/tree/arxiv) for the code that is aligned with our arXiv paper.***
+> Yupeng Hou†, Junjie Zhang†, Zihan Lin, Hongyu Lu, Ruobing Xie, Julian McAuley, Wayne Xin Zhao. Large Language Models are Zero-Shot Rankers for Recommender Systems. ECIR 2024.
 
 ## 🛍️ LLMs as Zero-Shot Rankers
 
@@ -61,10 +59,16 @@ LLMs suffer from position bias and popularity bias while ranking, which can be a
 
 ### Observation 3. Promising zero-shot ranking abilities
 
-LLMs have promising zero-shot ranking abilities, especially on candidates retrieved by multiple candidate generation models with different practical strategies.
+LLMs have promising zero-shot ranking abilities, ...
 
 <div align="center"> 
 <img src='assets/tab-3.png' width="75%">
+</div>
+
+..., especially on candidates retrieved by multiple candidate generation models with different practical strategies.
+
+<div align="center"> 
+<img src='assets/tab-4.png' width="70%">
 </div>
 
 **Code is here ->** [[reproduction scripts]](scripts/ob3-zero-shot-abilities.md)
@@ -76,11 +80,11 @@ LLMs have promising zero-shot ranking abilities, especially on candidates retrie
 Please cite the following paper if you find our code helpful.
 
 ```bibtex
-@article{hou2023llmrank,
+@inproceedings{hou2024llmrank,
   title={Large Language Models are Zero-Shot Rankers for Recommender Systems},
   author={Yupeng Hou and Junjie Zhang and Zihan Lin and Hongyu Lu and Ruobing Xie and Julian McAuley and Wayne Xin Zhao},
-  journal={arXiv preprint arXiv:2305.08845},
-  year={2023}
+  booktitle={{ECIR}},
+  year={2024}
 }
 ```
 
