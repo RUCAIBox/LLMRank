@@ -227,7 +227,6 @@ def convert_to_atomic_files(args, all_data):
                         sub_item_list = train_list[:-i][-args.max_length:]
                         sub_target_item = train_list[-i]
                         f1.write(str(user)+'\t'+' '.join([str(item) for item in sub_item_list])+'\t'+str(sub_target_item)+'\n')
-                    f1.write(str(user)+'\t'+' '.join([str(item) for item in train_list])+'\t'+str(train_target_item)+'\n')
 
 
 
